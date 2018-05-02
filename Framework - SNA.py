@@ -58,8 +58,7 @@ print ("ClusteringCoeff = ", amazonBooks[purchasedAsin]['ClusteringCoeff'])
     
 # Now let's look at the ego network associated with purchasedAsin in the
 # copurchaseGraph - which is esentially comprised of all the books 
-# that have been copurchased with this book in the past
-# (1) YOUR CODE HERE: 
+# that have been copurchased with this book in the past 
 #     Get the depth-1 ego network of purchasedAsin from copurchaseGraph,
 #     and assign the resulting graph to purchasedAsinEgoGraph.
 n = purchasedAsin
@@ -71,7 +70,6 @@ purchasedAsinEgoGraph = networkx.ego_graph(copurchaseGraph, n, radius=1)
 # the similarity between the books connected by the edge. So we can use the 
 # island method to only retain those books that are highly simialr to the 
 # purchasedAsin
-# (2) YOUR CODE HERE: 
 #     Use the island method on purchasedAsinEgoGraph to only retain edges with 
 #     threshold >= 0.5, and assign resulting graph to purchasedAsinEgoTrimGraph
 threshold = 0.5
@@ -85,8 +83,7 @@ for f, t, e in purchasedAsinEgoGraph.edges(data=True):
 
 # Next, recall that given the purchasedAsinEgoTrimGraph you constructed above, 
 # you can get at the list of nodes connected to the purchasedAsin by a single 
-# hop (called the neighbors of the purchasedAsin) 
-# (3) YOUR CODE HERE: 
+# hop (called the neighbors of the purchasedAsin)
 #     Find the list of neighbors of the purchasedAsin in the 
 #     purchasedAsinEgoTrimGraph, and assign it to purchasedAsinNeighbors
 #purchasedAsinNeighbors = purchasedAsinEgoTrimGraph[purchasedAsin]
@@ -97,10 +94,8 @@ print(purchasedAsinNeighbors)
 # purchasedAsinNeighbors based on one or more of the following data of the 
 # neighboring nodes: SalesRank, AvgRating, TotalReviews, DegreeCentrality, 
 # and ClusteringCoeff
-# (4) YOUR CODE HERE: 
-#     Note that, given an asin, you can get at the metadata associated with  
-#     it using amazonBooks (similar to lines 49-56 above).
-#     Now, come up with a composite measure to make Top Five book 
+
+#     composite measure to make Top Five book 
 #     recommendations based on one or more of the following metrics associated 
 #     with nodes in purchasedAsinNeighbors: SalesRank, AvgRating, 
 #     TotalReviews, DegreeCentrality, and ClusteringCoeff 
@@ -108,6 +103,7 @@ print(purchasedAsinNeighbors)
 #combining avg rating and no. of reviews to form a common factor
 
 #finding the max no of review in the list to find the factor which falls between (0,1)
+#edit: no. of review needs to be combined with the rating for a fair comparison
 list_for_max_reviews = []
 
 for i in purchasedAsinNeighbors:
@@ -151,7 +147,7 @@ print(recommendation_list)
 
 # Print Top 5 recommendations (ASIN, and associated Title, Sales Rank, 
 # TotalReviews, AvgRating, DegreeCentrality, ClusteringCoeff)
-# (5) YOUR CODE HERE:  
+
 i=1
 
 for item in recommendation_list:
